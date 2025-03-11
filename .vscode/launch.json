@@ -1,0 +1,54 @@
+let tasks = []; // Array to store tasks
+let taskId = 1; // Counter for unique task IDs
+
+// Create a new task
+function addTask(name, description) {
+    const task = { id: taskId++, name, description };
+    tasks.push(task);
+    return task;
+}
+
+// Get all tasks
+function getAllTasks() {
+    return tasks;
+}
+
+// Update a task
+function updateTask(id, newName, newDescription) {
+    const task = tasks.find(t => t.id === id);
+    if (task) {
+        task.name = newName || task.name;
+        task.description = newDescription || task.description;
+        return task;
+    }
+    return null; // Task not found
+}
+
+// Delete a task
+function deleteTask(id) {
+    const index = tasks.findIndex(t => t.id === id);
+    if (index !== -1) {
+        return tasks.splice(index, 1)[0]; // Remove and return deleted task
+    }
+    return null; // Task not found
+}
+
+// Testing the functions
+console.log("Adding tasks...");
+console.log(addTask("Learn JavaScript", "Complete the JavaScript tutorial"));
+console.log(addTask("Build a project", "Work on a CRUD app"));
+
+console.log("\nAll tasks:");
+console.log(getAllTasks());
+
+console.log("\nUpdating task 1...");
+console.log(updateTask(1, "Master JavaScript", "Practice every day"));
+
+console.log("\nAll tasks after update:");
+console.log(getAllTasks());
+
+console.log("\nDeleting task 2...");
+console.log(deleteTask(2));
+
+console.log("\nAll tasks after deletion:");
+console.log(getAllTasks());
